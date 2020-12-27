@@ -48,6 +48,7 @@ Fetch the database population.
 ```sh
 ❯ curl localhost:8000/shoppers/
 ```
+![movies](./img/get shoppers.png)
 
 #### `POST /shoppers/`
 
