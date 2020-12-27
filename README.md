@@ -139,7 +139,7 @@ Delete a specific shopper.
 > curl -X DELETE localhost:8000/shopper/4/
 ```
 
-#### POST /predict/
+#### `POST /predict/`
 
 Predict the purchasing intention for a given session.
 
