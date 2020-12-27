@@ -186,4 +186,6 @@ Predict the purchasing intention for a given session.
 }
 ```
 
+## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
