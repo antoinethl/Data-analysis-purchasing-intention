@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 import joblib
+import numpy as np
 
 # @csrf_exempt
 
@@ -65,12 +66,12 @@ def shopper_detail(request, pk):
 @csrf_exempt
 def predict(request):
     """
-    Renvoie une house avec la MEDV complétée
-    (Attend une MEDV innexistante)
+    Predict the "Revenue" target for a given shopper
     """
 
     if request.method == 'GET':
-        return JsonResponse(serializer.errors, status=400)
+        # return JsonResponse(serializer.errors, status=400)
+        return HttpResponse(status=400)
 
     elif request.method == "POST":
         data = JSONParser().parse(request)
@@ -89,20 +90,30 @@ def predict(request):
 
 def predict_revenue(unscaled_data):
 
+    path_to_model = "../../python_notebook/objects/rfc"
+    path_for_encoder = "../../python_notebook/objects/enc"
+
+    model = joblib.load(path_to_model)
+    encoder = joblib.load(path_for_encoder)
+
     colonnes = ["Administrative", "Administrative_Duration", "Informational", "Informational_Duration",
                 "ProductRelated", "ProductRelated_Duration", "BounceRates", "ExitRates", "PageValues",
                 "SpecialDay", "Month", "OperatingSystems", "Browser", "Region", "TrafficType", "VisitorType",
                 "Weekend"]
 
-    path_to_model = "./objects/rfc"
-    path_for_encoder = "./objects/encoder"
+    col_c = ["Month", "OperatingSystems", "Browser", "Region", "TrafficType", "VisitorType"]
+    col = [col for col in colonnes if col not in col_c]
 
-    unscaled_data = [unscaled_data[colonne] for colonne in colonnes]
+    cat_values = [unscaled_data[colonne] for colonne in col_c]
+    not_cat_values = [unscaled_data[colonne] for colonne in col]
 
-    model = joblib.load(path_to_model)
-    encoder = joblib.load(path_for_encoder)
+    cat_values = np.array(cat_values, dtype='object')
+    not_cat_values = np.array(not_cat_values)
 
-    scaled_data = encoder.transform(unscaled_data)
-    revenue = model.predict(scaled_data)
+    cat_values = encoder.transform(cat_values.reshape(1, -1)).toarray()[0]
 
-    return revenue
+    x = np.concatenate((not_cat_values, cat_values)).astype('float32')
+
+    revenue = model.predict(x.reshape(1, -1))
+
+    return bool(revenue)

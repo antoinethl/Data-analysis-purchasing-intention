@@ -1,6 +1,6 @@
 # Online shoppers purchasing intention prediction
 
-An analysis of a shoppers purchasing intention dataset. Contains a Python Notebook with visualizations, data pre-processing and machine/deep learning models for supervised learning. A model is then exported to a Django application to be used with a REST API. Requests can be made with cURL or every request senders to make predictions on a new observation.
+An analysis of a shoppers purchasing intention dataset. Contains a Python Notebook with visualizations, data pre-processing and machine/deep learning models for supervised learning. A model is then exported to a Django application to be used with a REST API. Requests can be made with cURL or every request senders to make predictions on a new observation on his intention to purchase or not.
 
 ## Dataset description
 
@@ -32,6 +32,8 @@ The three models used are:
 
 ## Django application and REST API
 
+The Django application allows to use the exported model with a REST API. We can store session information, display, modify or delete them. We can also predict "Revenue" class of our dataset which will tell us if, given the session information, the user will purchase or not.
+
 First, we have to start the Django Web application.
 
 ```sh
@@ -55,25 +57,25 @@ Fetch the database population.
 Save a new shopper in the database.
 
 ```sh
-> curl -X POST -H "Content-Type: application/json" -d 
-   "{\"Administrative\":0,
-     \"Administrative_Duration\":0.0,
-     \"Informational\":0,
-     \"Informational_Duration\":0.0,
-     \"ProductRelated\":1,
-     \"ProductRelated_Duration\":0.0,
-     \"BounceRates\":0.2,
-     \"ExitRates\":0.2,
-     \"PageValues\":0.0,
-     \"SpecialDay\":0.0,
-     \"Month\":\"Feb\",
-     \"OperatingSystems\":1,
-     \"Browser\":1,
-     \"Region\":1,
-     \"TrafficType\":1,
-     \"VisitorType\":\"Returning_Visitor\",
-     \"Weekend\":false,
-     \"Revenue\":null}" localhost:8000/shoppers/
+> curl -X POST -H "Content-Type: application/json" -d localhost:8000/shoppers/
+"{\"Administrative\":0,
+  \"Administrative_Duration\":0.0,
+  \"Informational\":0,
+  \"Informational_Duration\":0.0,
+  \"ProductRelated\":1,
+  \"ProductRelated_Duration\":0.0,
+  \"BounceRates\":0.2,
+  \"ExitRates\":0.2,
+  \"PageValues\":0.0,
+  \"SpecialDay\":0.0,
+  \"Month\":\"Feb\",
+  \"OperatingSystems\":1,
+  \"Browser\":1,
+  \"Region\":1,
+  \"TrafficType\":1,
+  \"VisitorType\":\"Returning_Visitor\",
+  \"Weekend\":false,
+  \"Revenue\":null}"
 ```
 
 #### `GET /shopper/:id`
@@ -109,24 +111,24 @@ Modify a specific shopper.
 
 ```sh
 > curl -X PUT -H "Content-Type: application/json" -d 
-   "{\"Administrative\":123456,
-     \"Administrative_Duration\":0.0,
-     \"Informational\":0,
-     \"Informational_Duration\":0.0,
-     \"ProductRelated\":1,
-     \"ProductRelated_Duration\":0.0,
-     \"BounceRates\":0.2,
-     \"ExitRates\":0.2,
-     \"PageValues\":0.0,
-     \"SpecialDay\":0.0,
-     \"Month\":\"Feb\",
-     \"OperatingSystems\":1,
-     \"Browser\":1,
-     \"Region\":1,
-     \"TrafficType\":1,
-     \"VisitorType\":\"Returning_Visitor\",
-     \"Weekend\":false,
-     \"Revenue\":null}" localhost:8000/shopper/4/
+"{\"Administrative\":123456,
+  \"Administrative_Duration\":0.0,
+  \"Informational\":0,
+  \"Informational_Duration\":0.0,
+  \"ProductRelated\":1,
+  \"ProductRelated_Duration\":0.0,
+  \"BounceRates\":0.2,
+  \"ExitRates\":0.2,
+  \"PageValues\":0.0,
+  \"SpecialDay\":0.0,
+  \"Month\":\"Feb\",
+  \"OperatingSystems\":1,
+  \"Browser\":1,
+  \"Region\":1,
+  \"TrafficType\":1,
+  \"VisitorType\":\"Returning_Visitor\",
+  \"Weekend\":false,
+  \"Revenue\":null}" localhost:8000/shopper/4/
 ```
 
 #### `DELETE /shopper/:id`
@@ -135,6 +137,53 @@ Delete a specific shopper.
 
 ```sh
 > curl -X DELETE localhost:8000/shopper/4/
+```
+
+#### POST /predict/
+
+Predict the purchasing intention for a given session.
+
+```sh
+> curl -X POST -H "Content-Type: application/json" -d localhost:8000/predict/
+"{\"Administrative\":0,
+  \"Administrative_Duration\":0.0,
+  \"Informational\":0,
+  \"Informational_Duration\":0.0,
+  \"ProductRelated\":1,
+  \"ProductRelated_Duration\":0.0,
+  \"BounceRates\":0.2,
+  \"ExitRates\":0.2,
+  \"PageValues\":0.0,
+  \"SpecialDay\":0.0,
+  \"Month\":\"Feb\",
+  \"OperatingSystems\":1,
+  \"Browser\":1,
+  \"Region\":1,
+  \"TrafficType\":1,
+  \"VisitorType\":\"Returning_Visitor\",
+  \"Weekend\":false,
+  \"Revenue\":null}"
+	 
+{
+  "Administrative": 123456, 
+  "Administrative_Duration": 0.0, 
+  "Informational": 0, 
+  "Informational_Duration": 0.0, 
+  "ProductRelated": 1, 
+  "ProductRelated_Duration": 0.0, 
+  "BounceRates": 0.2, 
+  "ExitRates": 0.2, 
+  "PageValues": 0.0, 
+  "SpecialDay": 0.0, 
+  "Month": "Feb", 
+  "OperatingSystems": 1, 
+  "Browser": 1, 
+  "Region": 1, 
+  "TrafficType": 1, 
+  "VisitorType": "Returning_Visitor", 
+  "Weekend": false, 
+  "Revenue": false
+}
 ```
 
 [MIT](https://choosealicense.com/licenses/mit/)
