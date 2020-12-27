@@ -57,7 +57,7 @@ Fetch the database population.
 Save a new shopper in the database.
 
 ```sh
-> curl -X POST -H "Content-Type: application/json" -d localhost:8000/shoppers/
+> curl -X POST -H "Content-Type: application/json" localhost:8000/shoppers/ -d 
 "{\"Administrative\":0,
   \"Administrative_Duration\":0.0,
   \"Informational\":0,
@@ -110,7 +110,7 @@ Fetch a specific shopper.
 Modify a specific shopper.
 
 ```sh
-> curl -X PUT -H "Content-Type: application/json" -d 
+> curl -X PUT -H "Content-Type: application/json" localhost:8000/shopper/4/ -d 
 "{\"Administrative\":123456,
   \"Administrative_Duration\":0.0,
   \"Informational\":0,
@@ -128,7 +128,7 @@ Modify a specific shopper.
   \"TrafficType\":1,
   \"VisitorType\":\"Returning_Visitor\",
   \"Weekend\":false,
-  \"Revenue\":null}" localhost:8000/shopper/4/
+  \"Revenue\":null}" 
 ```
 
 #### `DELETE /shopper/:id`
