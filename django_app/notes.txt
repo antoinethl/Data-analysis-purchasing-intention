@@ -1,0 +1,10 @@
+conda create --name ENVDjango python=3.8
+activate ENDjango
+
+
+nouveau dossier - exerciceDjango
+file new project - exercicedjango -
+interpereter conda environnedmand anaconda environnement ENDjango, python.exe ok, create
+
+terminal pip install djangorestframework
+pip install
