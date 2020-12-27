@@ -32,7 +32,7 @@ The three models used are:
 
 ## Django application and REST API
 
-The Django application allows to use the exported model with a REST API. We can store session information, display, modify or delete them. We can also predict "Revenue" class of our dataset which will tell us if, given the session information, the user will purchase or not.
+The Django application allows to use the exported model with a REST API. We can store session information, display, modify or delete them. We can also predict the "Revenue" class of our dataset which will tell us if, given the session information, the user will purchase or not.
 
 First, we have to start the Django Web application.
 
