@@ -160,7 +160,7 @@ Delete a specific shopper.
 Predict the purchasing intention for a given session.
 
 ```sh
-> curl -X POST -H "Content-Type: application/json" -d localhost:8000/predict/
+> curl -X POST -H "Content-Type: application/json" localhost:8000/predict/ -d
 "{\"Administrative\":0,
   \"Administrative_Duration\":0.0,
   \"Informational\":0,

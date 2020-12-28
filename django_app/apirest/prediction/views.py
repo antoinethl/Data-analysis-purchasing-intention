@@ -90,8 +90,8 @@ def predict(request):
 
 def predict_revenue(unscaled_data):
 
-    path_to_model = "../../python_notebook/objects/rfc"
-    path_for_encoder = "../../python_notebook/objects/enc"
+    path_to_model = "../../python_notebook/objects/model"
+    path_for_encoder = "../../python_notebook/objects/encoder"
 
     model = joblib.load(path_to_model)
     encoder = joblib.load(path_for_encoder)
