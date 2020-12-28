@@ -4,8 +4,11 @@ An analysis of a shoppers purchasing intention dataset. Contains a Python Notebo
 
 ## Context
 
-ESILV Project - Python for data analysis course
-2020 - TU Klarissa, THIOL Antoine
+ESILV Project - Python for data analysis course 2020
+
+TU Klarissa, THIOL Antoine
+
+[Github](https://github.com/klarissa3)
 
 ## Dataset description
 
