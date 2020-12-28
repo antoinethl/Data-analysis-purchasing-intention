@@ -2,6 +2,11 @@
 
 An analysis of a shoppers purchasing intention dataset. Contains a Python Notebook with visualizations, data pre-processing and machine/deep learning models for supervised learning. A model is then exported to a Django application to be used with a REST API. Requests can be made with cURL or every request senders to make predictions on a new observation on his intention to purchase or not.
 
+## Context
+
+ESILV Project - Python for data analysis course
+2020 - TU Klarissa, THIOL Antoine
+
 ## Dataset description
 
 The dataset used is the "Online Shoppers Purchasing Intention Dataset". 
@@ -33,6 +38,14 @@ The three models used are:
 ## Django application and REST API
 
 The Django application allows to use the exported model with a REST API. We can store session information, display, modify or delete them. We can also predict the "Revenue" class of our dataset which will tell us if, given the session information, the user will purchase or not.
+
+### Technologies
+
+- Python 3.8
+- Django, Jupyter Notebook
+- pandas, numpy, scikit-learn, keras, matplotlib, seaborn, joblib
+
+### User installation
 
 First, we have to start the Django Web application.
 
